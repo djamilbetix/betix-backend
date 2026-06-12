@@ -1,0 +1,4 @@
+PORT=3000
+PI_API_KEY=votre_api_key_pi
+PI_SANDBOX=true
+ADMIN_CODE=BETIX2026
