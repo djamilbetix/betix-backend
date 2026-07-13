@@ -126,7 +126,7 @@ app.post('/api/pi/resolve', async (req, res) => {
 });
 
 // ============================================================
-// 5. NEW : VALIDATE QR CODE TICKET
+// 5. VALIDATE QR CODE TICKET (AVEC purchase_date)
 // ============================================================
 app.post('/api/tickets/validate', async (req, res) => {
     const { ticketId } = req.body;
@@ -196,7 +196,8 @@ app.post('/api/tickets/validate', async (req, res) => {
                 id: ticket.id,
                 event_title: ticket.event_title,
                 ticket_type: ticket.ticket_type,
-                buyer_name: ticket.buyer_name
+                buyer_name: ticket.buyer_name,
+                purchase_date: ticket.purchase_date || ticket.created_at || ticket.purchaseDateTime
             }
         });
 
@@ -210,7 +211,7 @@ app.post('/api/tickets/validate', async (req, res) => {
 });
 
 // ============================================================
-// 6. NEW : TEST ENDPOINT (view ticket without modifying)
+// 6. TEST ENDPOINT (AVEC purchase_date)
 // ============================================================
 app.get('/api/tickets/test/:id', async (req, res) => {
     const ticketId = req.params.id;
@@ -237,7 +238,8 @@ app.get('/api/tickets/test/:id', async (req, res) => {
                 event_title: ticket.event_title,
                 status: ticket.status,
                 ticket_type: ticket.ticket_type,
-                buyer_name: ticket.buyer_name
+                buyer_name: ticket.buyer_name,
+                purchase_date: ticket.purchase_date || ticket.created_at || ticket.purchaseDateTime
             }
         });
     } catch (error) {
